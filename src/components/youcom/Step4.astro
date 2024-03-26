@@ -1,0 +1,61 @@
+<div class="loader">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 64 64"
+    height="64"
+    width="64"
+    class="inline-block overflow-visible"
+  >
+    <path
+      stroke-linejoin="round"
+      stroke-linecap="round"
+      stroke-width="10"
+      stroke="black"
+      d="M 54.722656,3.9726563 A 2.0002,2.0002 0 0 0 54.941406,4 h 5.007813 C 58.955121,17.046124 49.099667,27.677057 36.121094,29.580078 a 2.0002,2.0002 0 0 0 -1.708985,1.978516 V 60 H 29.587891 V 31.558594 A 2.0002,2.0002 0 0 0 27.878906,29.580078 C 14.900333,27.677057 5.0448787,17.046124 4.0507812,4 H 9.28125 c 1.231666,11.63657 10.984383,20.554048 22.6875,20.734375 a 2.0002,2.0002 0 0 0 0.02344,0 c 11.806958,0.04283 21.70649,-9.003371 22.730469,-20.7617187 z"
+      class="spin"
+      pathLength="360"></path>
+  </svg>
+</div>
+
+<style>
+  .inline-block {
+    display: inline-block;
+  }
+
+  .loader {
+    display: flex;
+    margin: 0.25em 0;
+  }
+
+  .spin {
+    animation:
+      dash4 2s linear infinite,
+      spin4 2s linear infinite;
+    transform-origin: center;
+  }
+
+  @keyframes dash4 {
+    0% {
+      stroke-dasharray: 0 0 0 360 0 360;
+    }
+
+    50% {
+      stroke-dasharray: 0 0 360 0 360 0;
+    }
+
+    100% {
+      stroke-dasharray: 0 360 0 360 0 360;
+    }
+  }
+
+  @keyframes spin4 {
+    0% {
+      stroke-dashoffset: 360;
+    }
+
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>

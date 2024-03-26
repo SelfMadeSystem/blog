@@ -1,0 +1,52 @@
+<div class="loader">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 64 64"
+    height="64"
+    width="64"
+    class="inline-block"
+  >
+    <path
+      stroke-linejoin="round"
+      stroke-linecap="round"
+      stroke-width="10"
+      stroke="black"
+      d="M 32 32
+          m 0 -27
+          a 27 27 0 1 1 0 54
+          a 27 27 0 1 1 0 -54"
+      class="spin"
+      pathLength="360"></path>
+  </svg>
+</div>
+
+<style>
+  .inline-block {
+    display: inline-block;
+  }
+
+  .loader {
+    display: flex;
+    margin: 0.25em 0;
+  }
+
+  .spin {
+    animation: dash2 2s linear infinite;
+    transform-origin: center;
+  }
+
+  @keyframes dash2 {
+    0% {
+      stroke-dasharray: 0 0 0 360;
+    }
+
+    50% {
+      stroke-dasharray: 0 0 360 0;
+    }
+
+    100% {
+      stroke-dasharray: 0 360 0 360;
+    }
+  }
+</style>
