@@ -5,11 +5,12 @@ pubDate: "Mar 26 2024"
 heroImage: "/ydc-logo.jpg"
 ---
 
-My animated You.com logo has been getting a lot of attention lately and a lot of people have been asking
-me questions about it. So I thought I'd write a blog post about how I made it and how you can make your
-own animated logo too.
+My animated You.com logo has been getting a lot of attention lately and a lot of
+people have been asking me questions about it. So I thought I'd write a blog
+post about how I made it and how you can make your own animated logo too.
 
-> **Note:** This post is not affiliated with You.com in any way. I just had a little fun with their logo.
+> **Note:** This post is not affiliated with You.com in any way. I just had a
+> little fun with their logo.
 
 import YouCom from "../../components/youcom/Full.astro";
 
@@ -19,30 +20,32 @@ import YouCom from "../../components/youcom/Full.astro";
 
 ## Step 1: Designing the logo
 
-This is the most important step in creating an animated logo. You need to have a clear idea of what you
-want your logo to look like and how you want it to move. I kinda cheated here because the You.com logo
-was already designed by a professional designer. The easiest way to make the logo animated is to have
-it designed using strokes instead of fills.
+This is the most important step in creating an animated logo. You need to have a
+clear idea of what you want your logo to look like and how you want it to move.
+I kinda cheated here because the You.com logo was already designed by a
+professional designer. The easiest way to make the logo animated is to have it
+designed using strokes instead of fills.
 
-{/* Add image */}
+{/* TODO: Add image */}
 
 ## Step 2: Animating the logo
 
-I originally used <abbr title="Synchronized Multimedia Integration Language">SMIL</abbr> to animate the
-logo, but I found that it isn't supported in all browsers and it has some performance issues. So I
-decided to use <abbr title="Cascading Style Sheets">CSS</abbr> animations instead.
+I originally used <abbr
+  title="Synchronized Multimedia Integration Language">SMIL</abbr> to animate
+the logo, but I found that it isn't supported in all browsers and it has some
+performance issues. So I decided to use <abbr
+  title="Cascading Style Sheets">CSS</abbr> animations instead.
 
-In non-technical terms, the basic idea is to draw parts of the outline of the logo in a sequence to make
-it look like it's being drawn. I used the `stroke-dasharray` and `stroke-dashoffset` properties in CSS to
-achieve this effect. The astute reader will notice that the animation is infinite, looping back on itself
-like a snake eating its own tail. This is very much inspired by Material Design's loading animations (which
-I am very fond of).
+In non-technical terms, the basic idea is to draw parts of the outline of the
+logo in a sequence to make it look like it's being drawn. I used the
+`stroke-dasharray` and `stroke-dashoffset` properties in CSS to achieve this
+effect. The astute reader will notice that the animation is infinite, looping
+back on itself like a snake eating its own tail. This is very much inspired by
+Material Design's loading animations (which I am very fond of).
 
-{/* I already said I'm describing *my* process */}
-{/* I'm changing from "I" to "we" */}
-{/* Keep to first person singular past tense */}
-I began by replicating Material Design's loading animation. The `stroke-dasharray` property defines the
-length of the dashes and the gaps in the stroke. This is the first key ingredient to the animation.
+I began by replicating Material Design's loading animation. The
+`stroke-dasharray` property defines the length of the dashes and the gaps in the
+stroke. This is the first key ingredient to the animation.
 
 {/* TODO: Add Material Design loader */}
 
@@ -73,11 +76,12 @@ First, I needed a circle. I used this:
 
 <br />
 
-> **Note:** The `pathLength` attribute is used to define the length of the path. This is used to calculate
-> the length of the dashes and gaps in the stroke. A value of `360` is used here just to make it easier to
-> deal with.
+> **Note:** The `pathLength` attribute is used to define the length of the path.
+> This is used to calculate the length of the dashes and gaps in the stroke. A
+> value of `360` is used here just to make it easier to deal with.
 
-Then I needed some CSS to animate the circle. I used `stroke-dasharray` for this:
+Then I needed some CSS to animate the circle. I used `stroke-dasharray` for
+this:
 
 ```css
 .circle {
@@ -109,13 +113,16 @@ import Step1 from "../../components/youcom/Step1.astro";
   <Step1 />
 </div>
 
-As you can see, the circle is going from an empty circle to a full circle and back to an empty circle.
-However, the stroke goes back to the start. If we compare it with the Material Design loading animation,
-we can see that when the stroke shrinks again, it moves forwards to the end. We can achieve this by
-adding a few more entries to the `stroke-dasharray` property. If we replace `0 360` with `0 0 360 0`,
-we're saying that the first dash is 0, the first gap is 0, the second dash is 360, and the second gap is 0.
-This looks the same as `0 360`, but having the `0 0` at the start allows us to move the stroke forward
-when the circle is shrinking by changing it to `0 360 0 360` (first dash 0, then a gap of 360).
+As you can see, the circle is going from an empty circle to a full circle and
+back to an empty circle. However, the stroke goes back to the start. If we
+compare it with the Material Design loading animation, we can see that when the
+stroke shrinks again, it moves forwards to the end. We can achieve this by
+adding a few more entries to the `stroke-dasharray` property. If we replace
+`0 360` with `0 0 360 0`, we're saying that the first dash is 0, the first gap
+is 0, the second dash is 360, and the second gap is 0. This looks the same as
+`0 360`, but having the `0 0` at the start allows us to move the stroke forward
+when the circle is shrinking by changing it to `0 360 0 360` (first dash 0, then
+a gap of 360).
 
 Here's the updated CSS:
 
@@ -149,11 +156,14 @@ import Step2 from "../../components/youcom/Step2.astro";
   <Step2 />
 </div>
 
-It was not spinning, though. There were a few different ways to make it spin. I could have used the `transform` or
-`rotate` properties to rotate the circle, or the `stroke-dashoffset` property to move
-the stroke around the circle. I used the `stroke-dashoffset` property so the entire thing didn't rotate. If I kept the `stroke-dasharray` as it was, there would have been a
-random dot that appeared. This is because `stroke-dasharray` loops back to the start when it reaches the
-end. I fixed this by duplicating the last two values in the `stroke-dasharray` so it never looped back to the start.
+It was not spinning, though. There were a few different ways to make it spin. I
+could have used the `transform` or `rotate` properties to rotate the circle, or
+the `stroke-dashoffset` property to move the stroke around the circle. I used
+the `stroke-dashoffset` property so the entire thing didn't rotate. If I kept
+the `stroke-dasharray` as it was, there would have been a random dot that
+appeared. This is because `stroke-dasharray` loops back to the start when it
+reaches the end. I fixed this by duplicating the last two values in the
+`stroke-dasharray` so it never looped back to the start.
 
 Here's the updated CSS:
 
@@ -201,13 +211,16 @@ import Step3 from "../../components/youcom/Step3.astro";
 
 ## Step 3: Adding the text
 
-Now that I had the spinning circle, I could add the text. You probably noticed that I used a `path`
-element instead of a `circle` element. This is because the `path` element is more versatile and can be
-used to create more complex shapes. All you need to do is take the outline of any character you want and
-use it as the `d` attribute of the `path` element. You can use a tool like
-[Inkscape](https://inkscape.org/) to trace the outline of any character and export it as an `svg` file.
+Now that I had the spinning circle, I could add the text. You probably noticed
+that I used a `path` element instead of a `circle` element. This is because the
+`path` element is more versatile and can be used to create more complex shapes.
+All you need to do is take the outline of any character you want and use it as
+the `d` attribute of the `path` element. You can use a tool like
+[Inkscape](https://inkscape.org/) to trace the outline of any character and
+export it as an `svg` file.
 
-Here's an example of how you can use the outline of the letter "Y" as the `d` attribute of the `path`:
+Here's an example of how you can use the outline of the letter "Y" as the `d`
+attribute of the `path`:
 
 import Step4 from "../../components/youcom/Step4.astro";
 
@@ -219,11 +232,12 @@ You can use the same CSS animation we used for the circle to animate the text.
 
 ## Step 4: Putting it all together
 
-Now that I had the spinning circle and the animated text, I had put it all together to create the
-animated You.com logo. My logo is a little more complex than this as it also has gradients and the circle
-is animated differently, but this should give you a good starting point. This is what the animated logo
-would look like without the extra fancy stuff (+ `ease-in-out` for the `dash` animation to make it look
-smoother):
+Now that I had the spinning circle and the animated text, I had put it all
+together to create the animated You.com logo. My logo is a little more complex
+than this as it also has gradients and the circle is animated differently, but
+this should give you a good starting point. This is what the animated logo
+would look like without the extra fancy stuff (+ `ease-in-out` for the `dash`
+animation to make it look smoother):
 
 import Step5 from "../../components/youcom/Step5.astro";
 
@@ -235,6 +249,7 @@ import Step5 from "../../components/youcom/Step5.astro";
 <br />
 <br />
 
-And that's how I made the animated You.com logo. I hope you found this post helpful and that it inspires
-you to create your own animated logo. If you have any questions or need help with anything, feel free to
-get in touch with me. I'd be happy to help you out.
+And that's how I made the animated You.com logo. I hope you found this post
+helpful and that it inspires you to create your own animated logo. If you have
+any questions or need help with anything, feel free to get in touch with me. I'd
+be happy to help you out.
